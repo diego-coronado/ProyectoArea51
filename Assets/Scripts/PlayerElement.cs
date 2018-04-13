@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Type
 	{
-		Neutral, Fire, Ice
+		NULL, Neutral, Fire, Ice
 	};
 
 public class PlayerElement : MonoBehaviour {
@@ -16,6 +16,13 @@ public class PlayerElement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_type = Type.Neutral;
+	}
+
+	public Type OppositeElement()
+	{
+		if (_type == Type.Fire) return Type.Ice;
+		if (_type == Type.Ice) return Type.Fire;
+		return Type.NULL;
 	}
 	
 	public Type State {
@@ -32,5 +39,18 @@ public class PlayerElement : MonoBehaviour {
 	{
 		GetComponent<Animator>().SetTrigger(animationTriggerString);
 		_type = type;
+	}
+
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			if (other.gameObject.GetComponent<PlayerElement>().State == OppositeElement())
+			{
+				Debug.Log("player collision");
+				other.gameObject.GetComponent<PlayerElement>().DisablePlayer();
+				this.DisablePlayer();
+			}
+		}
 	}
 }

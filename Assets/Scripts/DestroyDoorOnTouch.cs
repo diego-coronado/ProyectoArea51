@@ -11,16 +11,6 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 
 	private float _time = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	void OnCollisionStay2D(Collision2D other)
 	{
 		if(other.gameObject.tag == "Player")
@@ -32,6 +22,7 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 				if(_time >= _meltTime)
 				{
 					playerCharacteristics.DisablePlayer();
+					Debug.Log("plz work");
 					Destroy(gameObject);
 				}
 			}

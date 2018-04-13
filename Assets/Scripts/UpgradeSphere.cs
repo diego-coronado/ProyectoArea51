@@ -17,9 +17,16 @@ public class UpgradeSphere : MonoBehaviour {
 		{
 			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
 
-			playerCharacteristics.EnablePlayer(_newState, _newAnimationString, _newSprite);
-			if(_shouldDestroy)
-				Destroy(gameObject);	
+			if (playerCharacteristics.OppositeElement() == _newState)
+			{
+				playerCharacteristics.DisablePlayer();
+			}
+			else
+			{
+				playerCharacteristics.EnablePlayer(_newState, _newAnimationString, _newSprite);
+				if(_shouldDestroy)
+					Destroy(gameObject);
+			}
 		}
 		
 	}
