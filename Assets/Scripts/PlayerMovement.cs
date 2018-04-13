@@ -8,6 +8,14 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] private string _verticalAxis;
 
 	public float speed;
+	
+	private bool _canControl = true;
+	
+	public bool CanControl 
+	{
+		get { return _canControl; }
+		set { _canControl = value; }
+	}
 
 	private Rigidbody2D _rigidbody;
 
@@ -18,12 +26,20 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float h = Input.GetAxis(_horizontalAxis);
-		float v = Input.GetAxis(_verticalAxis);
 
-		Vector2 movement = new Vector2(h,v);
+		if (CanControl)
+		{
+			float h = Input.GetAxis(_horizontalAxis);
+			float v = Input.GetAxis(_verticalAxis);
 
-		_rigidbody.velocity = movement*speed;
+			Vector2 movement = new Vector2(h,v);
+
+			_rigidbody.velocity = movement*speed;
+		}
+		else 
+		{
+			_rigidbody.velocity = Vector2.zero;
+		}
 		
 	}
 }

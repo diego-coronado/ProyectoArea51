@@ -7,9 +7,9 @@ public enum Type
 		Neutral, Fire, Ice
 	};
 
-public class PlayerCharacteristics : MonoBehaviour {
+public class PlayerElement : MonoBehaviour {
 
-	public Material neutralMaterial;
+	public string neutralAnimation;
 
 	private Type _type;
 
@@ -24,13 +24,13 @@ public class PlayerCharacteristics : MonoBehaviour {
 
 	public void DisablePlayer()
 	{
-		GetComponent<Renderer>().material = neutralMaterial;
+		GetComponent<Animator>().SetTrigger(neutralAnimation);
 		_type = Type.Neutral;
 	}
 
-	public void EnablePlayer(Type type, Material newMaterial)
+	public void EnablePlayer(Type type, string animationTriggerString, Sprite newSprite)
 	{
-		GetComponent<Renderer>().material = newMaterial;
+		GetComponent<Animator>().SetTrigger(animationTriggerString);
 		_type = type;
 	}
 }

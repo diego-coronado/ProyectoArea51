@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class UpgradeSphere : MonoBehaviour {
 
-	[SerializeField] private Material _newMaterial;
+	[SerializeField] private string _newAnimationString;
+	[SerializeField] private Sprite _newSprite;
 	[SerializeField] private Type _newState;
 	[SerializeField] private bool _shouldDestroy = true;
 
@@ -14,14 +15,11 @@ public class UpgradeSphere : MonoBehaviour {
 	{
 		if(other.tag == "Player")
 		{
-			var playerCharacteristics = other.gameObject.GetComponent<PlayerCharacteristics>();
+			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
 
-			if(playerCharacteristics.State == Type.Neutral)
-			{
-				playerCharacteristics.EnablePlayer(_newState, _newMaterial);
-				if(_shouldDestroy)
-					Destroy(gameObject);
-			}	
+			playerCharacteristics.EnablePlayer(_newState, _newAnimationString, _newSprite);
+			if(_shouldDestroy)
+				Destroy(gameObject);	
 		}
 		
 	}

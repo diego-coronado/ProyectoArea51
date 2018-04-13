@@ -25,7 +25,7 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "Player")
 		{
-			var playerCharacteristics = other.gameObject.GetComponent<PlayerCharacteristics>();
+			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
 			
 			if(playerCharacteristics.State == _meltState){
 				_time += Time.deltaTime;
