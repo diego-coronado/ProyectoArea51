@@ -6,8 +6,10 @@ public class LevelTrigger : MonoBehaviour {
 
 	public Transform newCameraPosition;
 	public GameObject levelManager;
+	public int newCameraSize;
+	public SaveManager saveManager;
 
-	[SerializeField] private float _nextLevelMaxTime;
+	[SerializeField] private int _nextLevelMaxTime;
 
 	private int _passedPlayers = 0;
 	private bool _passedLevel = false;
@@ -25,6 +27,9 @@ public class LevelTrigger : MonoBehaviour {
 		{
 			var cameraPosition = Camera.main.transform.position;
 			Camera.main.transform.position = Vector3.Lerp(cameraPosition, newCameraPosition.position, 5 * Time.deltaTime);
+
+			var currentCameraSize = Camera.main.orthographicSize;
+			Camera.main.orthographicSize = Mathf.Lerp(currentCameraSize, newCameraSize, 5 * Time.deltaTime);
 
 			if (Vector3.Distance(Camera.main.transform.position, newCameraPosition.position) <= 0.2f)
 			{
@@ -58,6 +63,9 @@ public class LevelTrigger : MonoBehaviour {
 				_passedLevel = true;
 
 				levelManager.GetComponent<LevelTimer>().RunTimer = false;
+
+				if (saveManager)
+					saveManager.SaveCheckpoint(_nextLevelMaxTime, newCameraPosition, newCameraSize);
 
 				Debug.Log("Lvl completed");
 				//change lvl

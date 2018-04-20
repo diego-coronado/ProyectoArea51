@@ -41,6 +41,7 @@ public class LevelTimer : MonoBehaviour {
 
 			if (_timeLeft <= 0)
 			{
+				GetComponent<SaveManager>().LoadCheckpoint();
 				Debug.Log("GG WP");
 			}
 		}
