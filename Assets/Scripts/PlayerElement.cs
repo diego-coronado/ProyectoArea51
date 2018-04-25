@@ -15,6 +15,7 @@ public class PlayerElement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		PlayerPrefs.DeleteAll();
 		_type = Type.Neutral;
 	}
 
@@ -27,18 +28,26 @@ public class PlayerElement : MonoBehaviour {
 	
 	public Type State {
 		get { return _type; }
+		set 
+		{
+			_type = value;
+			if (_type == Type.Fire) gameObject.layer = 8;
+			if (_type == Type.Ice) gameObject.layer = 10;
+			if (_type == Type.Neutral) gameObject.layer = 11;			
+						
+		}
 	}
 
 	public void DisablePlayer()
 	{
 		GetComponent<Animator>().SetTrigger(neutralAnimation);
-		_type = Type.Neutral;
+		State = Type.Neutral;
 	}
 
 	public void EnablePlayer(Type type, string animationTriggerString, Sprite newSprite)
 	{
 		GetComponent<Animator>().SetTrigger(animationTriggerString);
-		_type = type;
+		State = type;
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
