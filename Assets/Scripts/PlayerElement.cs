@@ -12,10 +12,10 @@ public class PlayerElement : MonoBehaviour {
 	public string neutralAnimation;
 
 	private Type _type;
+	private string _animationString;
 
 	// Use this for initialization
 	void Start () {
-		PlayerPrefs.DeleteAll();
 		_type = Type.Neutral;
 	}
 
@@ -41,12 +41,14 @@ public class PlayerElement : MonoBehaviour {
 	public void DisablePlayer()
 	{
 		GetComponent<Animator>().SetTrigger(neutralAnimation);
+		_animationString = neutralAnimation;
 		State = Type.Neutral;
 	}
 
-	public void EnablePlayer(Type type, string animationTriggerString, Sprite newSprite)
+	public void EnablePlayer(Type type, string animationTriggerString)
 	{
 		GetComponent<Animator>().SetTrigger(animationTriggerString);
+		_animationString = animationTriggerString;
 		State = type;
 	}
 
@@ -54,11 +56,18 @@ public class PlayerElement : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player")
 		{
-			if (other.gameObject.GetComponent<PlayerElement>().State == OppositeElement())
+			var playerElement = other.gameObject.GetComponent<PlayerElement>();
+
+			if (playerElement.State == OppositeElement())
 			{
 				Debug.Log("player collision");
-				other.gameObject.GetComponent<PlayerElement>().DisablePlayer();
+				playerElement.DisablePlayer();
 				this.DisablePlayer();
+			}
+
+			if ((playerElement.State == Type.Neutral) && (_type != Type.Neutral))
+			{
+				playerElement.EnablePlayer(_type, _animationString);
 			}
 		}
 	}

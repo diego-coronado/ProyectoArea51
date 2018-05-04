@@ -26,7 +26,6 @@ public class Freezeable : MonoBehaviour {
 			if (_freezingTime >= maxFreezeTime)
 			{
 				_state = Type.Ice;
-				GetComponent<SpriteRenderer>().color = Color.blue;
 				_isFreezing = false;
 				gameObject.layer = 10;
 				OnFreeze.Invoke();
@@ -36,16 +35,40 @@ public class Freezeable : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if (col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerElement>().State == Type.Ice && _state == Type.Neutral)
+		if (col.gameObject.tag == "Player")
 		{
-			StartFreezing();
+			var playerElement = col.gameObject.GetComponent<PlayerElement>();
+
+			if (playerElement.State == Type.Ice && _state == Type.Neutral)
+			{
+				StartFreezing();				
+			}
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			var playerElement = col.gameObject.GetComponent<PlayerElement>();
+			Debug.Log("kisawa");
+			if (playerElement.State == Type.Fire && _state == Type.Ice)
+			{
+				playerElement.DisablePlayer();
+			}
+
+			else if (playerElement.State == Type.Neutral && _state == Type.Ice)
+			{
+				playerElement.EnablePlayer(Type.Ice, "ice");
+			}
 		}
 	}
 
 	void StartFreezing()
 	{
-		GetComponent<Collider2D>().enabled = false;
+		//GetComponent<Collider2D>().enabled = false;
 		_isFreezing = true;
+		_state = Type.Ice;
 	}
 
 }

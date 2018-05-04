@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelTimer : MonoBehaviour {
 
@@ -41,7 +42,8 @@ public class LevelTimer : MonoBehaviour {
 
 			if (_timeLeft <= 0)
 			{
-				GetComponent<SaveManager>().LoadCheckpoint();
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				//GetComponent<SaveManager>().LoadCheckpoint();
 				Debug.Log("GG WP");
 			}
 		}

@@ -5,7 +5,6 @@ using UnityEngine;
 public class UpgradeSphere : MonoBehaviour {
 
 	[SerializeField] private string _newAnimationString;
-	[SerializeField] private Sprite _newSprite;
 	[SerializeField] private Type _newState;
 	[SerializeField] private bool _shouldDestroy = true;
 
@@ -20,10 +19,12 @@ public class UpgradeSphere : MonoBehaviour {
 			if (playerCharacteristics.OppositeElement() == _newState)
 			{
 				playerCharacteristics.DisablePlayer();
+				if(_shouldDestroy)
+					Destroy(gameObject);
 			}
 			else
 			{
-				playerCharacteristics.EnablePlayer(_newState, _newAnimationString, _newSprite);
+				playerCharacteristics.EnablePlayer(_newState, _newAnimationString);
 				if(_shouldDestroy)
 					Destroy(gameObject);
 			}

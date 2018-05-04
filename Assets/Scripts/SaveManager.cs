@@ -11,9 +11,12 @@ public class SaveManager : MonoBehaviour {
 	public int levelTime;
 	public Text timerText;
 	public LevelTimer levelTimer;
+	public bool deletePlayerPrefs;
 
 	// Use this for initialization
 	void Start () {
+		if (deletePlayerPrefs)
+			PlayerPrefs.DeleteAll();
 		LoadCheckpoint();
 	}
 
@@ -23,11 +26,15 @@ public class SaveManager : MonoBehaviour {
 		player1Pos.x = PlayerPrefs.GetFloat("Player1X", player1.transform.position.x);
 		player1Pos.y = PlayerPrefs.GetFloat("Player1Y", player1.transform.position.y);
 		player1.transform.position = player1Pos;
+
+		player1.GetComponent<PlayerElement>().DisablePlayer();
 		
 		var player2Pos = player2.transform.position;
 		player2Pos.x = PlayerPrefs.GetFloat("Player2X", player2.transform.position.x);
 		player2Pos.y = PlayerPrefs.GetFloat("Player2Y", player2.transform.position.y);
 		player2.transform.position = player2Pos;
+
+		player2.GetComponent<PlayerElement>().DisablePlayer();		
 		
 		var camera = Camera.main;
 		var cameraPosVec = cameraPos.position;

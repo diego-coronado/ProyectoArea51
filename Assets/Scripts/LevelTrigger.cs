@@ -6,7 +6,7 @@ public class LevelTrigger : MonoBehaviour {
 
 	public Transform newCameraPosition;
 	public GameObject levelManager;
-	public int newCameraSize;
+	public float newCameraSize;
 	public SaveManager saveManager;
 
 	[SerializeField] private int _nextLevelMaxTime;

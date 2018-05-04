@@ -10,23 +10,30 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 	[SerializeField] private Type _meltState;
 
 	private float _time = 0;
+	private bool _runTimer;
 
-	void OnCollisionStay2D(Collision2D other)
+	void Update()
+	{
+		if (_runTimer)
+		{
+			_time += Time.deltaTime;
+			if(_time >= _meltTime)
+			{
+				Destroy(gameObject);
+			}
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		if(other.gameObject.tag == "Player")
 		{
 			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
 			
 			if(playerCharacteristics.State == _meltState){
-				_time += Time.deltaTime;
-				if(_time >= _meltTime)
-				{
-					playerCharacteristics.DisablePlayer();
-					Debug.Log("plz work");
-					Destroy(gameObject);
-				}
+				_runTimer = true;	
+				playerCharacteristics.DisablePlayer();				
 			}
 		}
-		
-	} 
+	}
 }
