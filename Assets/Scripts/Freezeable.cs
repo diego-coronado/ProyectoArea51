@@ -33,6 +33,7 @@ public class Freezeable : MonoBehaviour {
 		}
 	}
 
+	//Esto es para el objeto hijo, it works, don't know why, it's magic
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Player")
@@ -51,7 +52,7 @@ public class Freezeable : MonoBehaviour {
 		if (col.gameObject.tag == "Player")
 		{
 			var playerElement = col.gameObject.GetComponent<PlayerElement>();
-			Debug.Log("kisawa");
+
 			if (playerElement.State == Type.Fire && _state == Type.Ice)
 			{
 				playerElement.DisablePlayer();
@@ -69,6 +70,7 @@ public class Freezeable : MonoBehaviour {
 		//GetComponent<Collider2D>().enabled = false;
 		_isFreezing = true;
 		_state = Type.Ice;
+		GetComponent<Collider2D> ().isTrigger = true;
 	}
 
 }
