@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelTimer : MonoBehaviour {
 
 	public Text lvlTimer;
+	public GameObject player1;
+	public GameObject player2;
 	
 	[SerializeField] private float _levelMaxTime = 30;
 	public float LevelMaxTime
@@ -27,6 +29,8 @@ public class LevelTimer : MonoBehaviour {
 
 	private float _timeLeft;
 
+	private bool _paused;
+
 	// Use this for initialization
 	void Start () {
 		_timeLeft = _levelMaxTime;
@@ -34,6 +38,23 @@ public class LevelTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			if (_paused) 
+			{
+				_paused = false;
+				_runTimer = true;
+				Time.timeScale = 1;
+
+			} 
+			else 
+			{
+				_paused = true;
+				_runTimer = false;
+				Time.timeScale = 0;
+			}
+		}
+
 		if (_runTimer)
 		{
 			_timeLeft -= Time.deltaTime;
