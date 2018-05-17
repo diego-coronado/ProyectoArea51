@@ -9,6 +9,7 @@ public class LevelTimer : MonoBehaviour {
 	public Text lvlTimer;
 	public GameObject player1;
 	public GameObject player2;
+    public GameObject pauseMenu;
 	
 	[SerializeField] private float _levelMaxTime = 30;
 	public float LevelMaxTime
@@ -33,27 +34,22 @@ public class LevelTimer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_timeLeft = _levelMaxTime;
+        Time.timeScale = 1;
+        _timeLeft = _levelMaxTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			if (_paused) 
-			{
-				_paused = false;
-				_runTimer = true;
-				Time.timeScale = 1;
-
-			} 
-			else 
+			if (!_paused)  
 			{
 				_paused = true;
 				_runTimer = false;
 				Time.timeScale = 0;
-			}
-		}
+                pauseMenu.SetActive(true);
+            }
+        }
 
 		if (_runTimer)
 		{
@@ -69,4 +65,12 @@ public class LevelTimer : MonoBehaviour {
 			}
 		}
 	}
+
+    public void UnPause()
+    {
+        _paused = false;
+        _runTimer = true;
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+    }
 }

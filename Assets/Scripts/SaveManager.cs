@@ -45,7 +45,7 @@ public class SaveManager : MonoBehaviour {
 		camera.transform.position = cameraPosVec;
 
 		int oldLevelTime = PlayerPrefs.GetInt("LevelTime", levelTime);
-		oldLevelTime += 15;
+        oldLevelTime += 15;
 		timerText.text = oldLevelTime.ToString();
 		
 		levelTimer.LevelMaxTime = oldLevelTime;
