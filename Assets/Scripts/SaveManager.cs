@@ -12,6 +12,7 @@ public class SaveManager : MonoBehaviour {
 	public Text timerText;
 	public LevelTimer levelTimer;
 	public bool deletePlayerPrefs;
+	public static int currentLevel = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -45,10 +46,12 @@ public class SaveManager : MonoBehaviour {
 		camera.transform.position = cameraPosVec;
 
 		int oldLevelTime = PlayerPrefs.GetInt("LevelTime", levelTime);
-        oldLevelTime += 15;
+        //oldLevelTime += 15;
 		timerText.text = oldLevelTime.ToString();
 		
 		levelTimer.LevelMaxTime = oldLevelTime;
+
+		currentLevel = PlayerPrefs.GetInt("CurrentLevel", currentLevel); 
 	}
 	
 	public void SaveCheckpoint(int newLevelTime, Transform newCameraTransform, float newCameraSize)
@@ -69,6 +72,8 @@ public class SaveManager : MonoBehaviour {
 		PlayerPrefs.SetFloat("CameraX", cameraPos.position.x);
 		PlayerPrefs.SetFloat("CameraY", cameraPos.position.y);
 		PlayerPrefs.SetFloat("CameraZ", cameraPos.position.z);
+
+		PlayerPrefs.SetInt ("CurrentLevel", ++currentLevel);
 	}
 	
 }
