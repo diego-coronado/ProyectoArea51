@@ -10,6 +10,8 @@ public class LevelTimer : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
     public GameObject pauseMenu;
+
+	public Animator _imageAnimator;
 	
 	[SerializeField] private float _levelMaxTime = 30;
 	public float LevelMaxTime
@@ -36,6 +38,12 @@ public class LevelTimer : MonoBehaviour {
 	void Start () {
         Time.timeScale = 1;
         _timeLeft = _levelMaxTime;
+
+		if (PlayerPrefs.GetInt ("InitialImage", 1) == 1) 
+		{
+			_imageAnimator.gameObject.SetActive (true);
+			_imageAnimator.SetTrigger ("scene0");
+		}
 	}
 	
 	// Update is called once per frame

@@ -9,11 +9,11 @@ public class SecretChamber : MonoBehaviour {
 
 	public LevelTrigger[] levelTriggers;
 
-	private int currentLevel = 0;
+	private int currentLevel = 1;
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = SaveManager.currentLevel;
+		currentLevel = SaveManager.currentLevel == 0 ? 1 : SaveManager.currentLevel;
 	}
 	
 	// Update is called once per frame
@@ -34,8 +34,8 @@ public class SecretChamber : MonoBehaviour {
 
 	void AnimationFinished()
 	{
-
-		levelTriggers [currentLevel].ChangeLevel ();
+		Debug.Log (currentLevel);
+		levelTriggers [currentLevel].ShowStory ();
 		currentLevel++;
 	}
 }

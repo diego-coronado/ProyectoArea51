@@ -74,6 +74,8 @@ public class SaveManager : MonoBehaviour {
 		PlayerPrefs.SetFloat("CameraZ", cameraPos.position.z);
 
 		PlayerPrefs.SetInt ("CurrentLevel", ++currentLevel);
+
+		PlayerPrefs.SetInt ("InitialImage", 0);
 	}
 	
 }

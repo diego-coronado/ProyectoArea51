@@ -11,10 +11,13 @@ public class LevelTrigger : MonoBehaviour {
 	public SaveManager saveManager;
 
 	public Animator chamberAnimator;
+	public Animator storyAnimator;
+	public string storyTrigger;
 
 	private bool animationStarted = false;
 
 	[SerializeField] private int _nextLevelMaxTime;
+	[SerializeField] private bool _runChamberAnimation = true;
 
 	private int _passedPlayers = 0;
 	private bool _passedLevel = false;
@@ -27,13 +30,33 @@ public class LevelTrigger : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		if (!_runChamberAnimation && _passedLevel) 
+		{
+			var camPos = Camera.main.transform.position;
+			Camera.main.transform.position = Vector3.Lerp (camPos, newCameraPosition.position, 5 * Time.deltaTime);
+
+			var camSize = Camera.main.orthographicSize;
+			Camera.main.orthographicSize = Mathf.Lerp (camSize, newCameraSize, 5 * Time.deltaTime);
+
+			if (Vector3.Distance (camPos, Camera.main.transform.position) <= 0.2f) 
+			{
+				ChangeLevel ();
+			}
+		}
 	}
 
 	public void MoveCameraToNextPosition()
 	{
 		Camera.main.transform.position = newCameraPosition.position;
 		Camera.main.orthographicSize = newCameraSize;
+	}
+
+
+	public void ShowStory()
+	{
+		storyAnimator.SetTrigger (storyTrigger);
 	}
 
 	public void ChangeLevel()
@@ -62,15 +85,18 @@ public class LevelTrigger : MonoBehaviour {
 
 			if (_passedPlayers == 2) 
 			{
-				//_passedLevel = true;
+				_passedLevel = true;
 
 				levelManager.GetComponent<LevelTimer>().RunTimer = false;
 
 				if (saveManager)
 					saveManager.SaveCheckpoint(_nextLevelMaxTime, newCameraPosition, newCameraSize);
 
-				chamberAnimator.SetTrigger ("start");
-				Debug.Log ("start animation");
+				if (_runChamberAnimation) 
+				{
+					chamberAnimator.SetTrigger ("start");
+					Debug.Log ("start animation");
+				} 
 			}
 		}
 	}

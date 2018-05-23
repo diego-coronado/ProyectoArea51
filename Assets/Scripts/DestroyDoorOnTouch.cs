@@ -12,16 +12,23 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 	private float _time = 0;
 	private bool _runTimer;
 
+	private Animator _animator;
+
+	void Start()
+	{
+		_animator = GetComponent<Animator> ();
+	}
+
 	void Update()
 	{
-		if (_runTimer)
+		/*if (_runTimer)
 		{
 			_time += Time.deltaTime;
 			if(_time >= _meltTime)
 			{
 				Destroy(gameObject);
 			}
-		}
+		}*/
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
@@ -31,9 +38,15 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
 			
 			if(playerCharacteristics.State == _meltState){
-				_runTimer = true;	
-				playerCharacteristics.DisablePlayer();				
+				//_runTimer = true;	
+				playerCharacteristics.DisablePlayer();
+				_animator.SetTrigger ("animate");
 			}
 		}
+	}
+
+	void DestroyDoor()
+	{
+		Destroy (gameObject);
 	}
 }
