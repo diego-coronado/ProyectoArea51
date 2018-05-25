@@ -56,6 +56,8 @@ public class LevelTrigger : MonoBehaviour {
 
 	public void ShowStory()
 	{
+		Debug.Log (storyTrigger);
+		//storyAnimator.gameObject.SetActive (true);
 		storyAnimator.SetTrigger (storyTrigger);
 	}
 

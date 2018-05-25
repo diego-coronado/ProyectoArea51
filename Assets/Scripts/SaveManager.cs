@@ -14,11 +14,16 @@ public class SaveManager : MonoBehaviour {
 	public bool deletePlayerPrefs;
 	public static int currentLevel = 0;
 
-	// Use this for initialization
-	void Start () {
+	void Awake()
+	{
 		if (deletePlayerPrefs)
 			PlayerPrefs.DeleteAll();
 		LoadCheckpoint();
+
+	}
+
+	// Use this for initialization
+	void Start () {
 	}
 
 	public void LoadCheckpoint()

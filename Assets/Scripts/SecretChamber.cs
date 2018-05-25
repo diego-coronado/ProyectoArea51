@@ -14,6 +14,7 @@ public class SecretChamber : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentLevel = SaveManager.currentLevel == 0 ? 1 : SaveManager.currentLevel;
+		Debug.Log ("lvl:" + currentLevel);
 	}
 	
 	// Update is called once per frame
@@ -35,7 +36,14 @@ public class SecretChamber : MonoBehaviour {
 	void AnimationFinished()
 	{
 		Debug.Log (currentLevel);
+		levelTriggers [currentLevel].storyAnimator.gameObject.SetActive (true);
 		levelTriggers [currentLevel].ShowStory ();
+	}
+
+	public void ChangeLevel()
+	{
+		levelTriggers [currentLevel].ChangeLevel ();
 		currentLevel++;
+
 	}
 }

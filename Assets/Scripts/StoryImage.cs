@@ -1,26 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StoryImage : MonoBehaviour {
-	public LevelTrigger[] levelTriggers;
 
-	private int _currentLvl = 0;
+	public UnityEvent OnStoryFinished;
+	public UnityEvent OnGameFinished;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void AnimationFinished()
+	public void AnimationFinished()
 	{
+		OnStoryFinished.Invoke ();
+	}
 
-		levelTriggers [_currentLvl].ChangeLevel ();
-		_currentLvl++;
+	public void GameFinished()
+	{
+		OnGameFinished.Invoke ();
 	}
 }

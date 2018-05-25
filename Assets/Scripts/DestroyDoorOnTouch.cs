@@ -11,6 +11,7 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 
 	private float _time = 0;
 	private bool _runTimer;
+	private bool _beingDestroyed = false;
 
 	private Animator _animator;
 
@@ -35,12 +36,16 @@ public class DestroyDoorOnTouch : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "Player")
 		{
-			var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
-			
-			if(playerCharacteristics.State == _meltState){
-				//_runTimer = true;	
-				playerCharacteristics.DisablePlayer();
-				_animator.SetTrigger ("animate");
+			if (!_beingDestroyed) 
+			{
+				var playerCharacteristics = other.gameObject.GetComponent<PlayerElement>();
+
+				if(playerCharacteristics.State == _meltState){
+					//_runTimer = true;	
+					_beingDestroyed = true;
+					playerCharacteristics.DisablePlayer();
+					_animator.SetTrigger ("animate");
+				}
 			}
 		}
 	}

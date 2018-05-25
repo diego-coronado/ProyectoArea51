@@ -59,6 +59,12 @@ public class LevelTimer : MonoBehaviour {
             }
         }
 
+		if (Input.GetKeyDown (KeyCode.R)) 
+		{
+			Debug.Log ("f1");
+			pauseMenu.GetComponent<PauseMenu> ().ReloadLevel ();
+		}
+
 		if (_runTimer)
 		{
 			_timeLeft -= Time.deltaTime;
