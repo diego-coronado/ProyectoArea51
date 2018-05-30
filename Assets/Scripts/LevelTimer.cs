@@ -69,7 +69,7 @@ public class LevelTimer : MonoBehaviour {
 		{
 			_timeLeft -= Time.deltaTime;
 
-			lvlTimer.text = "Tiempo restante: " + _timeLeft.ToString("0.00");;
+			lvlTimer.text = _timeLeft.ToString("0.00") + "s";
 
 			if (_timeLeft <= 0)
 			{

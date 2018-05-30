@@ -13,8 +13,9 @@ public class ChangeScene : MonoBehaviour {
 	public Button backInstructionBtn;
 	public Button backCreditBtn;
 
-	public void ChangeLevel()
+	public void StartGame()
 	{
+		PlayerPrefs.DeleteAll ();
 		SceneManager.LoadScene (_sceneName);
 	}
 
