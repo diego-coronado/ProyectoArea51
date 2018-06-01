@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 3a44e3e83a8ab4f9ebd90cf28e30c7ed
+timeCreated: 1527813970
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Modern LCD-7
+  fontNames:
+  - Modern LCD-7
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

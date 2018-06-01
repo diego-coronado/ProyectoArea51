@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f2cf1a9a4f1d04e4989fca7c2ea1016c
+timeCreated: 1527813970
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Adelphi Plain
+  fontNames:
+  - Adelphi Plain
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

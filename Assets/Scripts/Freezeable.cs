@@ -65,6 +65,19 @@ public class Freezeable : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerStay2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			var playerElement = col.gameObject.GetComponent<PlayerElement>();
+
+			if (playerElement.State == Type.Fire && _state == Type.Ice)
+			{
+				playerElement.DisablePlayer();
+			}
+		}
+	}
+
 	void StartFreezing()
 	{
 		//GetComponent<Collider2D>().enabled = false;

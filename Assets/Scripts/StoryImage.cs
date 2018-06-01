@@ -15,6 +15,17 @@ public class StoryImage : MonoBehaviour {
 
 	public void GameFinished()
 	{
+		MusicManager.ResetClips ();
 		OnGameFinished.Invoke ();
+	}
+
+	public void ChangeSong ()
+	{
+		MusicManager.NextSong ();
+	}
+
+	public void PauseSong()
+	{
+		MusicManager.PauseClip ();
 	}
 }
